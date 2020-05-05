@@ -18,43 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function(){
-	/*Route::group(['prefix' => 'theloai'], function(){
-		Route::get('danhsach', 'TheLoaiController@get');
-		Route::get('sua', 'TheLoaiController@edit');
-		Route::get('them', 'TheLoaiController@add');
-	});*/
+Route::get('admin/login', 'UserController@getLogin');
+Route::post('admin/login', 'UserController@postLogin');
+Route::get('admin/logout', 'UserController@logout');
 
-	Route::resource('theloai', 'TheLoaiController');
+Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
 
-	/*Route::group(['prefix' => 'loaitin'], function(){
-		Route::get('danhsach', 'LoaiTinController@get');
-		Route::get('sua', 'LoaiTinController@edit');
-		Route::get('them', 'LoaiTinController@add');
-	});
+	Route::resource('theloai', 'TheLoaiController', ['except' => ['show']]);
 
-	Route::group(['prefix' => 'tintuc'], function(){
-		Route::get('danhsach', 'TinTucController@get');
-		Route::get('sua', 'TinTucController@edit');
-		Route::get('them', 'TinTucController@add');
-	});
+	Route::resource('loaitin', 'LoaiTinController', ['except' => ['show']]);
 
-	Route::group(['prefix' => 'slide'], function(){
-		Route::get('danhsach', 'SlideController@get');
-		Route::get('sua', 'SlideController@edit');
-		Route::get('them', 'SlideController@add');
-	});
+	Route::get('tintuc/loaitinOptions/{idTheLoai}', 'TinTucController@loaitinOptions');
+	Route::delete('tintuc/deleteComment/{idComment}/{idTinTuc}', 'TinTucController@deleteComment');
+	Route::resource('tintuc', 'TinTucController', ['except' => ['show']]);
 
-	Route::group(['prefix' => 'user'], function(){
-		Route::get('danhsach', 'UserController@get');
-		Route::get('sua', 'UserController@edit');
-		Route::get('them', 'UserController@add');
-	});
+	Route::resource('user', 'UserController', ['except' => ['show']]);
 
-	Route::group(['prefix' => 'comment'], function(){
-		Route::get('danhsach', 'CommentController@get');
-		Route::get('sua', 'CommentController@edit');
-		Route::get('them', 'CommentController@add');
-	});*/
+	Route::resource('slide', 'SlideController', ['except' => ['show']]);
 });
 

@@ -93,7 +93,7 @@ class TheLoaiController extends Controller
     {
         $request->validate(
             [
-                'Ten' => 'bail|required|unique:TheLoai,Ten|min:3|max:100',
+                'Ten' => 'bail|required|unique:TheLoai,Ten,'. $id .'|min:3|max:100',
             ],
 
             [
@@ -122,6 +122,9 @@ class TheLoaiController extends Controller
     public function destroy($id)
     {
         $theloai = TheLoai::find($id);
+        //$theloai->loaitin()->tintuc()->comment()->delete();
+        //$theloai->loaitin()->tintuc()->delete();
+        //$theloai->loaitin()->delete();
         $theloai->delete();
         Session::flash('thongbao', 'Đã xóa');
         return redirect('admin/theloai');
