@@ -19,13 +19,15 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function(){
-	Route::group(['prefix' => 'theloai'], function(){
+	/*Route::group(['prefix' => 'theloai'], function(){
 		Route::get('danhsach', 'TheLoaiController@get');
 		Route::get('sua', 'TheLoaiController@edit');
 		Route::get('them', 'TheLoaiController@add');
-	});
+	});*/
 
-	Route::group(['prefix' => 'loaitin'], function(){
+	Route::resource('theloai', 'TheLoaiController');
+
+	/*Route::group(['prefix' => 'loaitin'], function(){
 		Route::get('danhsach', 'LoaiTinController@get');
 		Route::get('sua', 'LoaiTinController@edit');
 		Route::get('them', 'LoaiTinController@add');
@@ -53,5 +55,6 @@ Route::group(['prefix' => 'admin'], function(){
 		Route::get('danhsach', 'CommentController@get');
 		Route::get('sua', 'CommentController@edit');
 		Route::get('them', 'CommentController@add');
-	});
+	});*/
 });
+
