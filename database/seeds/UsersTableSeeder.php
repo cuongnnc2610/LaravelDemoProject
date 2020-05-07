@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -18,7 +20,7 @@ class UsersTableSeeder extends Seeder
 	        		'name' => 'User_'.$i,
 	            	'email' => 'user_'.$i.'@gmail.com',
 	            	'password' => bcrypt('123456'),
-	            	'level'=> 0,
+	            	//'level'=> 0,
 	            	'created_at' => new DateTime(),
 	        	]
         	);

@@ -21,8 +21,12 @@
                         <th>ID</th>
                         <th>Tên</th>
                         <th>Tên Không Dấu</th>
+                        @can('update', App\TheLoai::class)
                         <th>Xóa</th>
+                        @endcan
+                        @can('delete', App\TheLoai::class)
                         <th>Sửa</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +35,7 @@
                             <td>{{$tl->id}}</td>
                             <td>{{$tl->Ten}}</td>
                             <td>{{$tl->TenKhongDau}}</td>
+                            @can('delete', App\TheLoai::class)
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
                                 <form action="admin/theloai/{{$tl->id}}" method="POST" style="display: inline-block;">
                                     @method('DELETE')
@@ -38,7 +43,10 @@
                                     <input type="submit" name="" value="Xóa" style="border: none; background: none; color: #337ab7">
                                 </form>
                             </td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/theloai/{{$tl->id}}/edit">Sửa</a></td>
+                            @endcan
+                            @can('update', App\TheLoai::class)
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="admin/theloai/{{$tl->id}}/edit">Sửa</a></td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

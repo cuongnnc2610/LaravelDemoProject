@@ -13,20 +13,24 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        @can('view', App\TheLoai::class)
                         <li>
                             <a href="admin/theloai"><i class="fa fa-bar-chart-o fa-fw"></i> Thể loại<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/theloai">Danh sách</a>
                                 </li>
+                                @can('create', App\TheLoai::class)
                                 <li>
                                     <a href="admin/theloai/create">Thêm</a>
                                 </li>
+                                @endcan
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endcan
                         <li>
                             <a href="admin/loaitin"><i class="fa fa-bar-chart-o fa-fw"></i> Loại tin<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

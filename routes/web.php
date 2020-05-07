@@ -14,15 +14,16 @@ use App\TheLoai;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/admin', 'HomeController@index');
 
 Route::get('admin/login', 'UserController@getLogin');
 Route::post('admin/login', 'UserController@postLogin');
 Route::get('admin/logout', 'UserController@logout');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
+
+	Route::get('/', 'HomeController@index');
 
 	Route::resource('theloai', 'TheLoaiController', ['except' => ['show']]);
 
@@ -35,5 +36,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 
 	Route::resource('slide', 'SlideController', ['except' => ['show']]);
+});
+
+Route::get('trangchu', function(){
+	return view('pages.trangchu');
 });
 

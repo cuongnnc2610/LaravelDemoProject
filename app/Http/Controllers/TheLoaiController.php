@@ -8,6 +8,15 @@ use Session;
 
 class TheLoaiController extends Controller
 {
+
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('can:create, App\TheLoai', ['only' => ['create']]);
+        $this->middleware('can:update, App\TheLoai',   ['only' => ['edit']]);
+        $this->middleware('can:delete, App\TheLoai',   ['only' => ['destroy']]);
+        $this->middleware('can:view, App\TheLoai',   ['only' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *

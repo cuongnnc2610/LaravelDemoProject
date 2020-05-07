@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class AdminLoginMiddleware
 {
     /**
@@ -19,13 +19,15 @@ class AdminLoginMiddleware
         if(Auth::check())
         {
             $user = Auth::user();
-            if($user->level == 1)
-            {
-                return $next($request);
-            }
-            else
-            {
-                return redirect('admin/login');
+            foreach ($user->roles as $role) {
+                if($role->id != 1)
+                {
+                    return $next($request);
+                }
+                else
+                {
+                    return redirect('admin/login');
+                }
             }
         }
         else
